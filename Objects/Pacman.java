@@ -15,7 +15,7 @@ import javax.swing.KeyStroke;
 public class Pacman extends MovableObject {
     public Pacman() {
         super();
-        setPreferredSize(new Dimension(500, 500));
+        setPreferredSize(new Dimension(800, 500));
         setBackground(Color.BLACK);
         this.dx = STEP;
         this.dy = 0;

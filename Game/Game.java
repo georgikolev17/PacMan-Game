@@ -22,6 +22,7 @@ public class Game implements ActionListener {
         timer.start();
 
         JFrame frame = new JFrame("Pac-Man Movement");
+        frame.setResizable(false);
 
         MovableObject pacman = this.gameState.getPacman();
         frame.add(pacman);
