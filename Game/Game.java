@@ -34,18 +34,19 @@ public class Game implements ActionListener {
         frame = new JFrame("Pac-Man Movement");
         panel = new JPanel();
         frame.add(panel);
-
+        panel.setLayout(null);
+        panel.setSize(910, 630);
         panel.setBackground(Color.BLACK);
 
-        MovableObject pacman = this.gameState.getPacman();
         Map map = new Map();
         for (var wall : map.getWalls()) {
-            frame.add(wall);
+            panel.add(wall);
         }
-        frame.add(pacman);
+        MovableObject pacman = new Pacman();
+        panel.add(pacman);
         // pacman.requestFocusInWindow();
         
-        frame.setPreferredSize(new Dimension(900, 600));
+        frame.setPreferredSize(new Dimension(910, 630));
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);

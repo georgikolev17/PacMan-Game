@@ -60,9 +60,10 @@ public class Map {
         int i = 0;
         int j = 0;
         for (int[] row : grid) {
+            j = 0;
             for (int cell : row) {
                 if (cell == 1) {
-                    Wall wall = new Wall(i * 30, j * 30);
+                    Wall wall = new Wall(j * 30, i * 30);
                     this.walls.add(wall);
                 }
                 

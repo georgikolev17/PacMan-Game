@@ -6,12 +6,14 @@ import javax.swing.*;
 
 public class Wall extends JPanel {
     private int side = 30; //pixels
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     public Wall(int xCord, int yCord) {
         this.x = xCord;
         this.y = yCord;
+
+        this.setBounds(x, y, side, side);
     }
 
     // Draws the object at coordinates x and y
@@ -19,6 +21,6 @@ public class Wall extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.BLUE);
-        g.drawRect(x, y, side, side);
+        g.fillRect(0, 0, side, side);
     }
 }

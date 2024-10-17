@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -30,6 +31,7 @@ public abstract class MovableObject extends JPanel implements ActionListener {
         // Calls the actionPerformed() function every 1ms
         timer = new Timer(1, this);
         timer.start();
+        this.setPreferredSize(new Dimension(objSize, objSize));
     }
 
     
