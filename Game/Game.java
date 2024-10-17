@@ -1,13 +1,18 @@
 package Game;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.*;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Objects.MovableObject;
 import Objects.Pacman;
+
+import Game.Renderer;
 
 public class Game implements ActionListener {
     private Timer timer;
@@ -15,21 +20,36 @@ public class Game implements ActionListener {
     public GameState gameState;
     public static Renderer renderer;
 
+    public static int ROWS = 20;
+    public static int COLUMNS = 30;
+    public static JFrame frame;
+    public static JPanel panel;
+
     public void NewGame() {
         this.gameState = new GameState();
 
         this.timer = new Timer(1, this); // fires the timer every 1ms (calls actionPer)
         timer.start();
 
-        JFrame frame = new JFrame("Pac-Man Movement");
+        frame = new JFrame("Pac-Man Movement");
+        panel = new JPanel();
+        frame.add(panel);
+
+        panel.setBackground(Color.BLACK);
 
         MovableObject pacman = this.gameState.getPacman();
+        Map map = new Map();
+        for (var wall : map.getWalls()) {
+            frame.add(wall);
+        }
         frame.add(pacman);
         // pacman.requestFocusInWindow();
         
+        frame.setPreferredSize(new Dimension(900, 600));
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 

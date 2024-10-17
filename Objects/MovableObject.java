@@ -22,7 +22,7 @@ public abstract class MovableObject extends JPanel implements ActionListener {
     protected int dy;
     protected int x = 50;
     protected int y = 50;
-    protected int objSize = 20;
+    protected int objSize = 30;
     protected Timer timer;
 
     public MovableObject() {
@@ -36,7 +36,6 @@ public abstract class MovableObject extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e);
         x += this.dx;
         y += this.dy;
         // Erases the object from its current position and calls paintComponent() function

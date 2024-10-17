@@ -15,8 +15,6 @@ import javax.swing.KeyStroke;
 public class Pacman extends MovableObject {
     public Pacman() {
         super();
-        setPreferredSize(new Dimension(500, 500));
-        setBackground(Color.BLACK);
         this.dx = STEP;
         this.dy = 0;
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "moveUp");
@@ -55,7 +53,6 @@ public class Pacman extends MovableObject {
     }
 
     public void changeDirection(int newDx, int newDy) {
-        // System.out.println("changed direction");
         this.dx = newDx;
         this.dy = newDy;
         repaint();
