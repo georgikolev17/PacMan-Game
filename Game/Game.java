@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Objects.Ghost;
 import Objects.MovableObject;
 import Objects.Pacman;
 
@@ -26,9 +27,11 @@ public class Game implements ActionListener {
     public static JPanel panel;
 
     public void NewGame() {
+        
+
         this.gameState = new GameState(); // object with all objects in game.
 
-        this.timer = new Timer(1, this); // fires the timer every 1ms (calls actionPer)
+        this.timer = new Timer(30, this); // fires the timer every 1ms (calls actionPer)
         timer.start();
 
 
@@ -64,8 +67,11 @@ public class Game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-        
+        this.gameState.getPacman().step();
+
+        var ghosts = this.gameState.getGhosts();
+        for (var ghost : ghosts) {
+            ghost.step();
+        }
     }
 }
