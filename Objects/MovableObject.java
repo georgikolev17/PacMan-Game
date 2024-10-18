@@ -35,6 +35,10 @@ public abstract class MovableObject extends JPanel {
         repaint();
     }
 
+    /**
+     * Stops the pacman from moving if there is a collision between it and a wall.
+     * @param collisionLocation where the collition is (left, right, up or down)
+     */
     public void wallCollision(String collisionLocation) {
         if (collisionLocation.equals("LEFT")) {
             this.dx = 0;

@@ -16,9 +16,8 @@ public class GameState {
     public GameState() {
         this.ghosts = new ArrayList<Ghost>();
         this.coins = new ArrayList<Coin>();
-        this.pacman = new Pacman();
-
         this.map = new Map();
+        this.pacman = new Pacman(this.map.getWalls());
     }
 
     public Pacman getPacman() {
