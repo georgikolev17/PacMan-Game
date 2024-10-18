@@ -14,7 +14,7 @@ public class Pacman extends MovableObject {
 
     public Pacman() {
         super();
-        setPreferredSize(new Dimension(800, 500));
+        // setPreferredSize(new Dimension(910, 630));
         setBackground(Color.BLACK);
         this.dx = STEP;
         this.dy = 0;
@@ -64,6 +64,6 @@ public class Pacman extends MovableObject {
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // deletes everything added before
         g.setColor(Color.YELLOW);
-        g.fillOval(x, y, objSize, objSize);  // Draw a yellow circle (Pacman)
+        g.fillOval(0, 0, objSize, objSize);  // Draw a yellow circle (Pacman)
     }
 }

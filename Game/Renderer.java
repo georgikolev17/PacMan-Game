@@ -22,8 +22,6 @@ public class Renderer {
     }
 
     public void RenderMap(Game game) {
-        ArrayList<
-        System.out.println(grid);
         int i = 0;
         int j = 0;
         for (int[] row : grid) {

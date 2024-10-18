@@ -71,6 +71,9 @@ public class GhostMovement {
             }
         }
         var backwardsStep = new Coordinates(pacmanRow, pacmanCol);
+        if (!previous.containsKey(backwardsStep)) {
+            return backwardsStep;
+        }
         while (!(previous.get(backwardsStep).getRow() == ghostRow 
             && previous.get(backwardsStep).getCol() == ghostCol)) {
             backwardsStep = previous.get(backwardsStep);
