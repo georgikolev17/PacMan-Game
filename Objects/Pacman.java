@@ -13,7 +13,11 @@ public class Pacman extends MovableObject {
 
     public Pacman() {
         super();
-        // Key bindings for movement
+        setPreferredSize(new Dimension(800, 500));
+        setBackground(Color.BLACK);
+        this.dx = STEP;
+        this.dy = 0;
+
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "moveUp");
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "moveDown");
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "moveLeft");

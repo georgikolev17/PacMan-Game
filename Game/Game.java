@@ -31,6 +31,7 @@ public class Game implements ActionListener {
         this.timer = new Timer(1, this); // fires the timer every 1ms (calls actionPer)
         timer.start();
 
+
         frame = new JFrame("Pac-Man Movement");
         panel = new JPanel(); // Main panel with all objects
 
