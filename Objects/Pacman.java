@@ -6,15 +6,25 @@ import javax.swing.KeyStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import Movement.CollisionDetection;
+
+import java.util.ArrayList;
 
 /**
  * Pacman
  */
 public class Pacman extends MovableObject {
+    private ArrayList<Wall> walls;
+    private CollisionDetection collisionDetection;
 
-    public Pacman() {
+    public Pacman(ArrayList<Wall> walls) {
         super();
-        // setPreferredSize(new Dimension(910, 630));
+        this.walls = walls;
+        this.collisionDetection = new CollisionDetection(walls);
+
+        this.x = 30;
+        this.y = 30;
+        // setPreferredSize(new Dimension(800, 500));
         setBackground(Color.BLACK);
         this.dx = STEP;
         this.dy = 0;
@@ -52,10 +62,27 @@ public class Pacman extends MovableObject {
             }
         });
     }
-
+    
     public void changeDirection(int newDx, int newDy) {
-        this.dx = newDx;
-        this.dy = newDy;
+        boolean[] whereAreWalls = collisionDetection.whereAreWalls(this);
+        boolean canChange = true;
+        if (newDx > 0) {
+            canChange = !whereAreWalls[1];
+        }
+        if (newDx < 0) {
+            canChange = !whereAreWalls[0];
+        }
+        if (newDy > 0) {
+            canChange = !whereAreWalls[3];
+        }
+        if (newDy < 0) {
+            canChange = !whereAreWalls[2];
+        }
+        if (canChange) {
+            this.dx = newDx;
+            this.dy = newDy;
+        }
+        
     }
 
     

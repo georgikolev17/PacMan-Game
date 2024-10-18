@@ -14,12 +14,14 @@ import Objects.MovableObject;
 import Objects.Pacman;
 
 import Game.Renderer;
+import Movement.CollisionDetection;
 
 public class Game implements ActionListener {
     private Timer timer;
     public static GameThread gameThread;
     public GameState gameState;
     public static Renderer renderer;
+    public CollisionDetection collisionDetection;
 
     public static int ROWS = 20;
     public static int COLUMNS = 30;
@@ -46,7 +48,9 @@ public class Game implements ActionListener {
         // Gets all objects from gameState object.
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
-        
+
+        collisionDetection = new CollisionDetection(map.getWalls());
+
         // Adds every wall in the map to the panel
         for (var wall : map.getWalls()) {
             panel.add(wall);
@@ -72,6 +76,7 @@ public class Game implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         System.out.println(this.gameState.getPacman().getX() + " " + this.gameState.getPacman().getY());
         // System.out.println(this.gameState.getPacman().getSize());
+
         this.gameState.getPacman().step();
 
         var ghosts = this.gameState.getGhosts();
@@ -79,5 +84,7 @@ public class Game implements ActionListener {
             ghost.changeDirection(this.gameState.getPacman().getX(), this.gameState.getPacman().getY());
             ghost.step();
         }
+
+        collisionDetection.checkCollision(this.gameState.getPacman());
     }
 }
