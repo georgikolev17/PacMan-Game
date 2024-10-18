@@ -9,16 +9,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Objects.Ghost;
 import Objects.MovableObject;
 import Objects.Pacman;
 
 import Game.Renderer;
+import Movement.CollisionDetection;
 
 public class Game implements ActionListener {
     private Timer timer;
     public static GameThread gameThread;
     public GameState gameState;
     public static Renderer renderer;
+    public CollisionDetection collisionDetection;
 
     public static int ROWS = 20;
     public static int COLUMNS = 30;
@@ -26,9 +29,11 @@ public class Game implements ActionListener {
     public static JPanel panel;
 
     public void NewGame() {
+        
+
         this.gameState = new GameState(); // object with all objects in game.
 
-        this.timer = new Timer(1, this); // fires the timer every 1ms (calls actionPer)
+        this.timer = new Timer(30, this); // fires the timer every 1ms (calls actionPer)
         timer.start();
 
 
@@ -44,6 +49,8 @@ public class Game implements ActionListener {
         // Gets all objects from gameState object.
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
+
+        collisionDetection = new CollisionDetection(map.getWalls());
 
         // Adds every wall in the map to the panel
         for (var wall : map.getWalls()) {
@@ -64,8 +71,14 @@ public class Game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-        
+        this.gameState.getPacman().step();
+
+        var ghosts = this.gameState.getGhosts();
+        for (var ghost : ghosts) {
+            ghost.step();
+        }
+
+        collisionDetection.checkCollision(this.gameState.getPacman());
+
     }
 }
