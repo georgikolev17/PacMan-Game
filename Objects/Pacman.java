@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 /**
