@@ -10,8 +10,8 @@ public abstract class MovableObject extends JPanel implements ActionListener {
     protected final int STEP = 5;
     protected int dx = STEP;
     protected int dy = 0;
-    protected int x = 50;
-    protected int y = 50;
+    protected int x;
+    protected int y;
     protected int objSize = 30;  // Size of Pacman
     protected Timer timer;
 

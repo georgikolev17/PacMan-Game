@@ -14,6 +14,8 @@ public class Pacman extends MovableObject {
 
     public Pacman() {
         super();
+        this.x = 30;
+        this.y = 30;
         setPreferredSize(new Dimension(800, 500));
         setBackground(Color.BLACK);
         this.dx = STEP;
