@@ -56,8 +56,10 @@ public class Pacman extends MovableObject {
     }
 
     public void changeDirection(int newDx, int newDy) {
-        this.dx = newDx;
+        if (this.canChangeDirection()) {
+            this.dx = newDx;
         this.dy = newDy;
+        }
     }
 
     

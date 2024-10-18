@@ -30,21 +30,50 @@ public abstract class MovableObject extends JPanel {
         x += this.dx;
         y += this.dy;
         // System.out.println(y / 30 + " " + x / 30);
-        // Ensure the object stays within panel bounds
-        if (x < 0) {
-            x = 0;
-        }
-        if (y < 0) {
-            y = 0;
-        }
-        if (x + objSize > getWidth()) {
-            x = getWidth() - objSize;
-        }
-        if (y + objSize > getHeight()) {
-            y = getHeight() - objSize;
-        }
+        
         // Repaint the object
         repaint();
+    }
+
+    public void wallCollision(String collisionLocation) {
+        if (collisionLocation.equals("LEFT")) {
+            this.dx = 0;
+            this.x += STEP;
+        } if (collisionLocation.equals("RIGHT")) {
+            this.dx = 0;
+            this.x -= STEP;
+        } if (collisionLocation.equals("UP")) {
+            this.dy = 0;
+            this.y += STEP;
+        } if (collisionLocation.equals("DOWN")) {
+            this.dy = 0;
+            this.y -= STEP;
+        }
+    }
+
+    public boolean canChangeDirection() {
+        return (this.x % 30 == 0) && (this.y % 30 == 0);
+    }
+
+    public int getDx() {
+        return this.dx;
+    }
+
+    public int getDy() {
+        return this.dy;
+    }
+
+    public int getObjectSize() {
+        return this.objSize;
+    }
+
+
+    public int getXPosition() {
+        return this.x;
+    }
+
+    public int getYPosition() {
+        return this.y;
     }
 
 }
