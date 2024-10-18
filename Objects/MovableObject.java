@@ -49,39 +49,26 @@ public abstract class MovableObject extends JPanel {
     }
 
     /**
-     * Summary: The step every movable object makes on every period of time (for now 30ms).
-     */
-    public void step() {
-        x += this.dx;
-        y += this.dy;
-        // System.out.println(y / 30 + " " + x / 30);
-        
-        // Repaint the object
-        repaint();
-    }
-
-    /**
      * Stops the pacman from moving if there is a collision between it and a wall.
      * @param collisionLocation where the collition is (left, right, up or down)
      */
     public void wallCollision(String collisionLocation) {
         if (collisionLocation.equals("LEFT")) {
             this.dx = 0;
-            this.x += STEP;
-        } if (collisionLocation.equals("RIGHT")) {
+            this.setLocation(this.getX() + STEP, this.getY());
+        } 
+        if (collisionLocation.equals("RIGHT")) {
             this.dx = 0;
-            this.x -= STEP;
-        } if (collisionLocation.equals("UP")) {
+            this.setLocation(this.getX() - STEP, this.getY());
+        } 
+        if (collisionLocation.equals("UP")) {
             this.dy = 0;
-            this.y += STEP;
-        } if (collisionLocation.equals("DOWN")) {
+            this.setLocation(this.getX(), this.getY() + STEP);
+        } 
+        if (collisionLocation.equals("DOWN")) {
             this.dy = 0;
-            this.y -= STEP;
+            this.setLocation(this.getX(), this.getY() - STEP);
         }
-    }
-
-    public boolean canChangeDirection() {
-        return (this.x % 30 == 0) && (this.y % 30 == 0);
     }
 
     public int getDx() {

@@ -20,10 +20,9 @@ public class Pacman extends MovableObject {
     public Pacman(ArrayList<Wall> walls) {
         super();
         this.walls = walls;
-        this.collisionDetection = new CollisionDetection(walls);
+        this.collisionDetection = new CollisionDetection(walls, this);
 
-        this.x = 30;
-        this.y = 30;
+        this.setLocation(30, 30);
         // setPreferredSize(new Dimension(800, 500));
         setBackground(Color.BLACK);
         this.dx = STEP;
@@ -64,7 +63,7 @@ public class Pacman extends MovableObject {
     }
     
     public void changeDirection(int newDx, int newDy) {
-        boolean[] whereAreWalls = collisionDetection.whereAreWalls(this);
+        boolean[] whereAreWalls = collisionDetection.whereAreWalls();
         boolean canChange = true;
         if (newDx > 0) {
             canChange = !whereAreWalls[1];

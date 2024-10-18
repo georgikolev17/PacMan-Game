@@ -4,30 +4,31 @@ import java.util.ArrayList;
 import java.lang.Math;
 
 import Objects.MovableObject;
+import Objects.Pacman;
 import Objects.Wall;
 
 
 public class CollisionDetection {
-    ArrayList<Wall> walls;
-    int pacmanX;
-    int pacmanY;
-    int pacmanDx;
-    int pacmanDy;
-    int objSize;
-    MovableObject pacman;
+    private ArrayList<Wall> walls;
+    private int pacmanX;
+    private int pacmanY;
+    private int pacmanDx;
+    private int pacmanDy;
+    private int objSize;
+    private Pacman pacman;
 
-    public CollisionDetection(ArrayList<Wall> walls) {
+    public CollisionDetection(ArrayList<Wall> walls, Pacman pacman) {
         this.walls = walls;
+        this.pacman = pacman;
         
     }
 
-    public void checkCollision(MovableObject pacman) {
-        this.pacmanX = pacman.getXPosition();
-        this.pacmanY = pacman.getYPosition();
+    public void checkCollision() {
+        this.pacmanX = pacman.getX();
+        this.pacmanY = pacman.getY();
         this.pacmanDx = pacman.getDx();
         this.pacmanDy = pacman.getDy();
         this.objSize = pacman.getObjectSize();
-        this.pacman = pacman;
 
         // Goes through each wall to see if the pacman has collision with one
         for (Wall wall : walls) {
@@ -46,9 +47,9 @@ public class CollisionDetection {
         }
     }
 
-    public boolean[] whereAreWalls(MovableObject pacman) {
-        this.pacmanX = pacman.getXPosition();
-        this.pacmanY = pacman.getYPosition();
+    public boolean[] whereAreWalls() {
+        this.pacmanX = pacman.getX();
+        this.pacmanY = pacman.getY();
         this.objSize = pacman.getObjectSize();
 
         boolean[] whereAreWalls = new boolean[4]; 

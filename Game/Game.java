@@ -29,13 +29,7 @@ public class Game implements ActionListener {
     public static JPanel panel;
 
     public void NewGame() {
-        
-
         this.gameState = new GameState(); // object with all objects in game.
-
-        this.timer = new Timer(30, this); // fires the timer every 1ms (calls actionPer)
-        timer.start();
-
 
         frame = new JFrame("Pac-Man Movement");
         panel = new JPanel(); // Main panel with all objects
@@ -49,7 +43,7 @@ public class Game implements ActionListener {
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
 
-        collisionDetection = new CollisionDetection(map.getWalls());
+        collisionDetection = new CollisionDetection(map.getWalls(), this.gameState.getPacman());
 
         // Adds every wall in the map to the panel
         for (var wall : map.getWalls()) {
@@ -70,6 +64,9 @@ public class Game implements ActionListener {
         frame.setLocationRelativeTo(null); // Puts window in middle of screen
         frame.setResizable(false); // Makes it so you cant resize window.
         frame.setVisible(true);
+
+        this.timer = new Timer(30, this); // fires the timer every 1ms (calls actionPer)
+        timer.start();
     }
 
     @Override
@@ -85,6 +82,6 @@ public class Game implements ActionListener {
             ghost.step();
         }
 
-        collisionDetection.checkCollision(this.gameState.getPacman());
+        collisionDetection.checkCollision();
     }
 }
