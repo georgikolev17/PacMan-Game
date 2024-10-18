@@ -20,11 +20,10 @@ public class Pacman extends MovableObject {
     public Pacman(ArrayList<Wall> walls) {
         super();
         this.walls = walls;
-        this.collisionDetection = new CollisionDetection(walls);
+        this.collisionDetection = new CollisionDetection(walls, this);
 
-        this.x = 30;
-        this.y = 30;
-        setPreferredSize(new Dimension(800, 500));
+        this.setLocation(30, 30);
+        // setPreferredSize(new Dimension(800, 500));
         setBackground(Color.BLACK);
         this.dx = STEP;
         this.dy = 0;
@@ -64,7 +63,7 @@ public class Pacman extends MovableObject {
     }
     
     public void changeDirection(int newDx, int newDy) {
-        boolean[] whereAreWalls = collisionDetection.whereAreWalls(this);
+        boolean[] whereAreWalls = collisionDetection.whereAreWalls();
         boolean canChange = true;
         if (newDx > 0) {
             canChange = !whereAreWalls[1];
@@ -91,6 +90,6 @@ public class Pacman extends MovableObject {
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // deletes everything added before
         g.setColor(Color.YELLOW);
-        g.fillOval(x, y, objSize, objSize);  // Draw a yellow circle (Pacman)
+        g.fillOval(0, 0, objSize, objSize);  // Draw a yellow circle (Pacman)
     }
 }
