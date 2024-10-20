@@ -47,6 +47,11 @@ public class CollisionDetection {
         }
     }
 
+    /**
+     * Checks if there are walls around the object in all its directions.
+     * @return an array with a boolean for every direction 
+     *         (0 is left, 1 is right, 2 is up and 3 is down).
+     */
     public boolean[] whereAreWalls() {
         this.pacmanX = pacman.getX();
         this.pacmanY = pacman.getY();

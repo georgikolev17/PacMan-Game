@@ -75,6 +75,7 @@ public class Game implements ActionListener {
         // System.out.println(this.gameState.getPacman().getSize());
 
         this.gameState.getPacman().step();
+        this.gameState.getPacman().nextChangeDirection(this.gameState.getPacman().getNextDirection());
 
         var ghosts = this.gameState.getGhosts();
         for (var ghost : ghosts) {

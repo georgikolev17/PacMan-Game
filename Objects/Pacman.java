@@ -16,11 +16,13 @@ import java.util.ArrayList;
 public class Pacman extends MovableObject {
     private ArrayList<Wall> walls;
     private CollisionDetection collisionDetection;
+    private String nextDirection;
 
     public Pacman(ArrayList<Wall> walls) {
         super();
         this.walls = walls;
         this.collisionDetection = new CollisionDetection(walls, this);
+        this.nextDirection = "";
 
         this.setLocation(30, 30);
         // setPreferredSize(new Dimension(800, 500));
@@ -67,21 +69,44 @@ public class Pacman extends MovableObject {
         boolean canChange = true;
         if (newDx > 0) {
             canChange = !whereAreWalls[1];
+            this.nextDirection = "RIGHT";
         }
         if (newDx < 0) {
             canChange = !whereAreWalls[0];
+            this.nextDirection = "LEFT";
         }
         if (newDy > 0) {
             canChange = !whereAreWalls[3];
+            this.nextDirection = "DOWN";
         }
         if (newDy < 0) {
             canChange = !whereAreWalls[2];
+            this.nextDirection = "UP";
         }
         if (canChange) {
             this.dx = newDx;
             this.dy = newDy;
+            this.nextDirection = "";
         }
         
+    }
+
+    public String getNextDirection() {
+        return this.nextDirection;
+    }
+
+    public void nextChangeDirection(String direction) {
+        if (direction.equals("LEFT")) {
+            changeDirection(-STEP, 0);
+        } if (direction.equals("RIGHT")) {
+            changeDirection(STEP, 0);
+            
+        } if (direction.equals("UP")) {
+            changeDirection(0, -STEP);
+            
+        } if (direction.equals("DOWN")) {
+            changeDirection(0, STEP);
+        }
     }
 
     
