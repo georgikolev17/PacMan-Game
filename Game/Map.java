@@ -9,12 +9,15 @@ public class Map {
     private final int ROWS = Game.ROWS;
     private final int COLUMNS = Game.COLUMNS;
     private ArrayList<Wall> walls;
+    private ArrayList<Coin> coins;
 
     public Map() {
         grid = new int[ROWS][COLUMNS];
         walls = new ArrayList<Wall>();
-        createGrid();
+        coins = new ArrayList<Coin>();
+        this.createGrid();
         this.generateWalls();
+        this.generateCoins();
     }
 
     /**
@@ -73,11 +76,32 @@ public class Map {
         }
     }
 
+    private void generateCoins() {
+        int i = 0;
+        int j = 0;
+        for (int[] row : grid) {
+            j = 0;
+            for (int cell : row) {
+                if (cell == 0) {
+                    Coin coin = new Coin(j * 30 + 10, i * 30 + 10);
+                    this.coins.add(coin);
+                }
+                
+                j++;
+            }
+            i++;
+        }
+    }
+
     public int[][] getGrid() {
         return this.grid;
     }
 
     public ArrayList<Wall> getWalls() {
         return this.walls;
+    }
+
+    public ArrayList<Coin> getCoins() {
+        return this.coins;
     }
 }

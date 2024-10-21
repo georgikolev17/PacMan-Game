@@ -18,7 +18,7 @@ public class GameState {
         this.coins = new ArrayList<Coin>();
 
         this.map = new Map();
-        this.pacman = new Pacman(this.map.getWalls());
+        this.pacman = new Pacman(this.map.getWalls(), this.map.getCoins());
       
         this.ghosts.add(new SmartGhost(this.map.getGrid(), 1, 1));
         this.ghosts.add(new StupidGhost(this.map.getGrid(), 1, 1));

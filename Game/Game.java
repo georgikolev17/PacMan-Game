@@ -26,7 +26,7 @@ public class Game implements ActionListener {
     public static int ROWS = 20;
     public static int COLUMNS = 30;
     public static JFrame frame;
-    public static JPanel panel;
+    public static JPanel panel; // Main panel
 
     public void NewGame() {
         this.gameState = new GameState(); // object with all objects in game.
@@ -43,11 +43,16 @@ public class Game implements ActionListener {
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
 
-        collisionDetection = new CollisionDetection(map.getWalls(), this.gameState.getPacman());
+        collisionDetection = new CollisionDetection(map.getWalls(), map.getCoins(), this.gameState.getPacman());
 
         // Adds every wall in the map to the panel
         for (var wall : map.getWalls()) {
             panel.add(wall);
+        }
+
+        // Adds every coin in the map to the panel
+        for (var coin : map.getCoins()) {
+            panel.add(coin);
         }
         
         frame.add(panel);

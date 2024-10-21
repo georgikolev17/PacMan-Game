@@ -18,10 +18,10 @@ public class Pacman extends MovableObject {
     private CollisionDetection collisionDetection;
     private String nextDirection;
 
-    public Pacman(ArrayList<Wall> walls) {
+    public Pacman(ArrayList<Wall> walls, ArrayList<Coin> coins) {
         super();
         this.walls = walls;
-        this.collisionDetection = new CollisionDetection(walls, this);
+        this.collisionDetection = new CollisionDetection(walls, coins, this);
         this.nextDirection = "";
 
         this.setLocation(30, 30);
