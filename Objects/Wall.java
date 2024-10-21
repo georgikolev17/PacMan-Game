@@ -13,7 +13,7 @@ public class Wall extends JPanel {
         this.setLocation(xCord, yCord);
 
         this.setBounds(this.getX(), this.getY(), side, side);
-        System.out.println("Wall created at: (" + this.getX() + ", " + this.getY() + "), size: " + side);
+
     }
 
     // Draws the object at coordinates x and y
