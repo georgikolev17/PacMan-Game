@@ -69,7 +69,7 @@ public abstract class MovableObject extends JPanel {
             this.dy = 0;
             this.setLocation(this.getX(), this.getY() - STEP);
         }
-    }
+    }   
 
     public int getDx() {
         return this.dx;

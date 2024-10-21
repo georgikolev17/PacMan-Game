@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -43,7 +44,11 @@ public class Game implements ActionListener {
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
 
-        collisionDetection = new CollisionDetection(map.getWalls(), map.getCoins(), this.gameState.getPacman());
+        collisionDetection = new CollisionDetection(map.getWalls(), map.getCoins(), this.gameState.getPacman(), this.gameState);
+
+        frame.add(panel);
+
+        panel.add(pacman);
 
         // Adds every wall in the map to the panel
         for (var wall : map.getWalls()) {
@@ -54,15 +59,20 @@ public class Game implements ActionListener {
         for (var coin : map.getCoins()) {
             panel.add(coin);
         }
-        
-        frame.add(panel);
-        panel.add(pacman);
+
+        // Puts label for score in the panel to the front
+        JLabel scoreLabel = this.gameState.getText().getScore();
+        panel.add(scoreLabel);
+        panel.setComponentZOrder(scoreLabel, 0);  // Puts the label in front
+
+        // Puts label for level in the panel to the front
+        JLabel levelLabel = this.gameState.getText().getLevel();
+        panel.add(levelLabel);
+        panel.setComponentZOrder(levelLabel, 0);  // Puts the label in front
+
         for (var ghost : this.gameState.getGhosts()) {
             panel.add(ghost);
         }
-
-        //panel.revalidate(); 
-        //panel.repaint();
         
         frame.pack(); // Fits the frame to the prefered size
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
