@@ -3,6 +3,9 @@ package Objects;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
+
+import Game.GameState;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,11 +20,13 @@ public class Pacman extends MovableObject {
     private ArrayList<Wall> walls;
     private CollisionDetection collisionDetection;
     private String nextDirection;
+    private GameState gameState;
 
-    public Pacman(ArrayList<Wall> walls, ArrayList<Coin> coins) {
+    public Pacman(ArrayList<Wall> walls, ArrayList<Coin> coins, GameState gameState) {
         super();
         this.walls = walls;
-        this.collisionDetection = new CollisionDetection(walls, coins, this);
+        this.gameState = gameState;
+        this.collisionDetection = new CollisionDetection(walls, coins, this, this.gameState);
         this.nextDirection = "";
 
         this.setLocation(30, 30);

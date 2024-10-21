@@ -8,6 +8,7 @@ import javax.swing.*;
  */
 public class Coin extends JPanel{
     private int objSize;
+    private boolean isEaten;
     /**
      * Summary: Initializes a new Coin class with the given x and y coordinates and points.
      * @param x x-coordinate
@@ -16,12 +17,21 @@ public class Coin extends JPanel{
     public Coin(int xCord, int yCord) {
         this.setLocation(xCord, yCord);
         this.objSize = 10;
+        this.isEaten = false;
         this.setBounds(this.getX(), this.getY(), objSize, objSize);
         setOpaque(false);
     }
 
     public int getObjectSize() {
         return this.objSize;
+    }
+    
+    public boolean getIsEaten() {
+        return this.isEaten;
+    }
+
+    public void setIsEaten(boolean isEaten) {
+        this.isEaten = isEaten;
     }
 
     @Override

@@ -12,13 +12,15 @@ public class GameState {
     private ArrayList<Coin> coins;
     private Pacman pacman;
     private Map map;
+    private Text text;
     
     public GameState() {
         this.ghosts = new ArrayList<Ghost>();
         this.coins = new ArrayList<Coin>();
 
         this.map = new Map();
-        this.pacman = new Pacman(this.map.getWalls(), this.map.getCoins());
+        this.pacman = new Pacman(this.map.getWalls(), this.map.getCoins(), this);
+        this.text = new Text();
       
         this.ghosts.add(new SmartGhost(this.map.getGrid(), 1, 1));
         this.ghosts.add(new StupidGhost(this.map.getGrid(), 1, 1));
@@ -38,5 +40,9 @@ public class GameState {
 
     public Map getMap() {
         return this.map;
+    }
+    
+    public Text getText() {
+        return this.text;
     }
 }

@@ -8,6 +8,7 @@ import Objects.Pacman;
 import Objects.Wall;
 import Objects.Coin;
 import Game.Game;
+import Game.GameState;
 
 
 public class CollisionDetection {
@@ -19,11 +20,15 @@ public class CollisionDetection {
     private int pacmanDy;
     private int objSize;
     private Pacman pacman;
+    private int score;
+    private GameState gameState;
 
-    public CollisionDetection(ArrayList<Wall> walls, ArrayList<Coin> coins, Pacman pacman) {
+    public CollisionDetection(ArrayList<Wall> walls, ArrayList<Coin> coins, Pacman pacman, GameState gameState) {
         this.walls = walls;
         this.pacman = pacman;
         this.coins = coins;
+        this.gameState = gameState;
+        this.score = 0;
     }
 
     public void checkCollision() {
@@ -51,16 +56,27 @@ public class CollisionDetection {
         // Goes through each coin to see if the pacman has collision with one.
         // If there is a collision, the coin gets removed and the points increase by one.
         for (Coin coin : coins) {
-            if ((-coin.getObjectSize() < (coin.getX() - pacmanX)) && ((coin.getX() - pacmanX) < 0) && (Math.abs(coin.getY() - pacmanY) == 10) && (pacmanDx < 0)) {
-                Game.panel.remove(coin);
-            } if ((objSize > (coin.getX() - pacmanX)) && ((coin.getX() - pacmanX) > 0) && (Math.abs(coin.getY() - pacmanY) == 10) && (pacmanDx > 0)) {
-                Game.panel.remove(coin);
-            } if ((-coin.getObjectSize() < (coin.getY() - pacmanY)) && ((coin.getY() - pacmanY) < 0) && (Math.abs(coin.getX() - pacmanX) == 10) && (pacmanDy < 0)) {
-                Game.panel.remove(coin);
-            } if ((objSize > (coin.getY() - pacmanY)) && ((coin.getY() - pacmanY) > 0) && (Math.abs(coin.getX() - pacmanX) == 10) && (pacmanDy > 0)) {
-                Game.panel.remove(coin);
+            if (!coin.getIsEaten() && (-coin.getObjectSize() < (coin.getX() - pacmanX)) && ((coin.getX() - pacmanX) < 0) && (Math.abs(coin.getY() - pacmanY) == 10) && (pacmanDx < 0)) {
+                coinCollision(coin);
+
+            } if (!coin.getIsEaten() && (objSize > (coin.getX() - pacmanX)) && ((coin.getX() - pacmanX) > 0) && (Math.abs(coin.getY() - pacmanY) == 10) && (pacmanDx > 0)) {
+                coinCollision(coin);
+
+            } if (!coin.getIsEaten() && (-coin.getObjectSize() < (coin.getY() - pacmanY)) && ((coin.getY() - pacmanY) < 0) && (Math.abs(coin.getX() - pacmanX) == 10) && (pacmanDy < 0)) {
+                coinCollision(coin);
+
+            } if (!coin.getIsEaten() && (objSize > (coin.getY() - pacmanY)) && ((coin.getY() - pacmanY) > 0) && (Math.abs(coin.getX() - pacmanX) == 10) && (pacmanDy > 0)) {
+                coinCollision(coin);
+                
             }
         }
+    }
+
+    public void coinCollision(Coin coin) {
+        Game.panel.remove(coin); // Removes coin from the panel
+        coin.setIsEaten(true); // Sets the coin as eaten
+        score++;
+        gameState.getText().setScore(score);
     }
 
     /**
