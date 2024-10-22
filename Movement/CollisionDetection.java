@@ -10,6 +10,7 @@ import Objects.MovableObject;
 import Objects.Pacman;
 import Objects.Wall;
 import Objects.Coin;
+import Objects.Ghost;
 import Game.Game;
 import Game.GameState;
 
@@ -17,6 +18,7 @@ import Game.GameState;
 public class CollisionDetection {
     private ArrayList<Wall> walls;
     private ArrayList<Coin> coins;
+    private ArrayList<Ghost> ghosts;
     private int objSize;
     private Pacman pacman;
     private GameState gameState;
@@ -25,6 +27,7 @@ public class CollisionDetection {
         this.walls = gameState.getMap().getWalls();
         this.pacman = gameState.getPacman();
         this.coins = gameState.getMap().getCoins();
+        this.ghosts = gameState.getGhosts();
         this.gameState = gameState;
         this.objSize = this.pacman.getObjectSize();
     }
@@ -138,5 +141,18 @@ public class CollisionDetection {
             }
         }
         return null;
+    }
+
+    public boolean pacmanCollidesWithGhost(int pacmanX, int pacmanY) {
+        for (Ghost ghost : this.ghosts) {
+            int ghostX = ghost.getX();
+            int ghostY = ghost.getY();
+
+            if (Math.abs(pacmanX - ghostX) < GlobalConstants.MovableObjectSize 
+                && Math.abs(pacmanY - ghostY) < GlobalConstants.MovableObjectSize) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -107,6 +107,21 @@ public class Game implements ActionListener {
             this.gameState.levelUp();
             // TODO: Spawn 1 more stupid and smart ghost.
         }
+
+        if (this.collisionDetection.pacmanCollidesWithGhost(this.gameState.getPacman().getX(),
+            this.gameState.getPacman().getY())) {
+            this.gameOver();
+        }
+    }
+
+    private void gameOver() {
+        this.timer.stop();
+        // TODO: This is temporary solution just for easier development. 
+        // Game over logic should be implemented.
+        // -------------------
+        this.frame.dispose();
+        this.NewGame();
+        // -------------------
     }
 
     private void removeCoin(Coin coin) {
