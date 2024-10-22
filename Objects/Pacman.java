@@ -28,7 +28,7 @@ public class Pacman extends MovableObject {
         this.gameState = gameState;
         this.nextDirection = "";
         
-        this.setLocation(30, 30);
+        this.setLocation(90, 30);
         // setPreferredSize(new Dimension(800, 500));
         setBackground(Color.BLACK);
         this.dx = STEP;
