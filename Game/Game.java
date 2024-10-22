@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -23,7 +24,7 @@ public class Game implements ActionListener {
     public static int ROWS = 20;
     public static int COLUMNS = 30;
     public static JFrame frame;
-    public static JPanel panel;
+    public static JPanel panel; // Main panel
 
     /**
      * Summary: d.
@@ -43,21 +44,35 @@ public class Game implements ActionListener {
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
 
-        collisionDetection = new CollisionDetection(map.getWalls(), this.gameState.getPacman());
+        collisionDetection = new CollisionDetection(map.getWalls(), map.getCoins(), this.gameState.getPacman(), this.gameState);
+
+        frame.add(panel);
+
+        panel.add(pacman);
 
         // Adds every wall in the map to the panel
         for (var wall : map.getWalls()) {
             panel.add(wall);
         }
-        
-        frame.add(panel);
-        panel.add(pacman);
+
+        // Adds every coin in the map to the panel
+        for (var coin : map.getCoins()) {
+            panel.add(coin);
+        }
+
+        // Puts label for score in the panel to the front
+        JLabel scoreLabel = this.gameState.getText().getScore();
+        panel.add(scoreLabel);
+        panel.setComponentZOrder(scoreLabel, 0);  // Puts the label in front
+
+        // Puts label for level in the panel to the front
+        JLabel levelLabel = this.gameState.getText().getLevel();
+        panel.add(levelLabel);
+        panel.setComponentZOrder(levelLabel, 0);  // Puts the label in front
+
         for (var ghost : this.gameState.getGhosts()) {
             panel.add(ghost);
         }
-
-        //panel.revalidate(); 
-        //panel.repaint();
         
         frame.pack(); // Fits the frame to the prefered size
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,6 +90,7 @@ public class Game implements ActionListener {
         // System.out.println(this.gameState.getPacman().getSize());
 
         this.gameState.getPacman().step(this.collisionDetection);
+        this.gameState.getPacman().nextChangeDirection(this.gameState.getPacman().getNextDirection());
 
         var ghosts = this.gameState.getGhosts();
         for (var ghost : ghosts) {
@@ -82,6 +98,6 @@ public class Game implements ActionListener {
             ghost.step(this.collisionDetection);
         }
 
-        // collisionDetection.checkCollision();
+        collisionDetection.checkCollision();
     }
 }

@@ -3,6 +3,10 @@ package Objects;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
+
+import Common.GlobalConstants;
+import Game.GameState;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,11 +20,15 @@ import java.util.ArrayList;
 public class Pacman extends MovableObject {
     private ArrayList<Wall> walls;
     private CollisionDetection collisionDetection;
+    private String nextDirection;
+    private GameState gameState;
 
-    public Pacman(ArrayList<Wall> walls) {
+    public Pacman(ArrayList<Wall> walls, ArrayList<Coin> coins, GameState gameState) {
         super();
         this.walls = walls;
-        this.collisionDetection = new CollisionDetection(walls, this);
+        this.gameState = gameState;
+        this.collisionDetection = new CollisionDetection(walls, coins, this, this.gameState);
+        this.nextDirection = "";
 
         this.setLocation(30, 30);
         // setPreferredSize(new Dimension(800, 500));
@@ -63,28 +71,37 @@ public class Pacman extends MovableObject {
     }
     
     public void changeDirection(int newDx, int newDy) {
-        // boolean[] whereAreWalls = collisionDetection.whereAreWalls();
-        // boolean canChange = true;
-        // if (newDx > 0) {
-        //     canChange = !whereAreWalls[1];
-        // }
-        // if (newDx < 0) {
-        //     canChange = !whereAreWalls[0];
-        // }
-        // if (newDy > 0) {
-        //     canChange = !whereAreWalls[3];
-        // }
-        // if (newDy < 0) {
-        //     canChange = !whereAreWalls[2];
-        // }
-        // if (canChange) {
-        //     this.dx = newDx;
-        //     this.dy = newDy;
-        // }
-
-        if (collisionDetection.colidesWithWall(this.getX() + newDx, this.getY() + newDy) == null) {
+        var wall = collisionDetection.colidesWithWall(this.getX() + newDx, this.getY() + newDy);
+        if (wall == null) {
             this.dx = newDx;
             this.dy = newDy;
+            this.nextDirection = "";
+        } else if (newDx > 0) {
+            this.nextDirection = "RIGHT";
+        } else if (newDx < 0) {
+            this.nextDirection = "LEFT";
+        } else if (newDy > 0) {
+            this.nextDirection = "DOWN";
+        } else if (newDy < 0) {
+            this.nextDirection = "UP";
+        }
+    }
+
+    public String getNextDirection() {
+        return this.nextDirection;
+    }
+
+    public void nextChangeDirection(String direction) {
+        if (direction.equals("LEFT")) {
+            changeDirection(-STEP, 0);
+        } if (direction.equals("RIGHT")) {
+            changeDirection(STEP, 0);
+            
+        } if (direction.equals("UP")) {
+            changeDirection(0, -STEP);
+            
+        } if (direction.equals("DOWN")) {
+            changeDirection(0, STEP);
         }
     }
 
