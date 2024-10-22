@@ -1,6 +1,7 @@
 package Game;
 
 import Movement.CollisionDetection;
+import Objects.Coin;
 import Objects.MovableObject;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,7 +45,7 @@ public class Game implements ActionListener {
         Map map = gameState.getMap();
         MovableObject pacman = gameState.getPacman();
 
-        collisionDetection = new CollisionDetection(map.getWalls(), map.getCoins(), this.gameState.getPacman(), this.gameState);
+        collisionDetection = new CollisionDetection(this.gameState);
 
         frame.add(panel);
 
@@ -86,9 +87,6 @@ public class Game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // System.out.println(this.gameState.getPacman().getX() + " " + this.gameState.getPacman().getY());
-        // System.out.println(this.gameState.getPacman().getSize());
-
         this.gameState.getPacman().step(this.collisionDetection);
         this.gameState.getPacman().nextChangeDirection(this.gameState.getPacman().getNextDirection());
 
@@ -97,7 +95,16 @@ public class Game implements ActionListener {
             ghost.changeDirection(this.gameState.getPacman().getX(), this.gameState.getPacman().getY());
             ghost.step(this.collisionDetection);
         }
-
         collisionDetection.checkCollision();
+        var coin = collisionDetection.checkCoinCollision();
+        if (coin != null) {
+            this.removeCoin(coin);
+        }
+    }
+
+    private void removeCoin(Coin coin) {
+        panel.remove(coin); // Removes coin from the panel
+        coin.setIsEaten(true); // Sets the coin as eaten
+        this.gameState.addScore(coin.getValue());
     }
 }

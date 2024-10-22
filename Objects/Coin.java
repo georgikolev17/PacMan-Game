@@ -3,20 +3,25 @@ package Objects;
 import java.awt.*;
 import javax.swing.*;
 
+import Common.GlobalConstants;
+
 /**
  * Summary: The coin has a position on the map and points that it gives to the player.
  */
 public class Coin extends JPanel{
     private int objSize;
     private boolean isEaten;
+    private final int value;
+
     /**
      * Summary: Initializes a new Coin class with the given x and y coordinates and points.
      * @param x x-coordinate
      * @param y y-coordinate
      */
-    public Coin(int xCord, int yCord) {
+    public Coin(int xCord, int yCord, int value) {
+        this.value = value;
         this.setLocation(xCord, yCord);
-        this.objSize = 10;
+        this.objSize = GlobalConstants.CoinSize;
         this.isEaten = false;
         this.setBounds(this.getX(), this.getY(), objSize, objSize);
         setOpaque(false);
@@ -32,6 +37,10 @@ public class Coin extends JPanel{
 
     public void setIsEaten(boolean isEaten) {
         this.isEaten = isEaten;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override

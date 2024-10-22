@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * It includes ghosts, the Pac-Man, the map, and the coins 
  */
 public class GameState {
+    private int score = 0;
+    private int level = 0;
     private ArrayList<Ghost> ghosts;
     private ArrayList<Coin> coins;
     private Pacman pacman;
@@ -44,5 +46,14 @@ public class GameState {
     
     public Text getText() {
         return this.text;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void addScore(int increment) {
+        this.score += increment;
+        this.text.setScore(this.score);
     }
 }

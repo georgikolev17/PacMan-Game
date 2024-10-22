@@ -11,11 +11,11 @@ import Common.GlobalConstants;
 import Movement.CollisionDetection;
 
 public abstract class MovableObject extends JPanel {
-    protected static final int STEP = 5;
+    protected static final int STEP = GlobalConstants.PacmanStep;
     protected int dx = STEP;
     protected int dy = 0;
 
-    protected int objSize = 30;  // Size of Pacman
+    protected int objSize = GlobalConstants.MovableObjectSize;  // Size of Pacman
     protected Timer timer;
 
     public MovableObject() {
@@ -66,25 +66,25 @@ public abstract class MovableObject extends JPanel {
     /**
      * Stops the pacman from moving if there is a collision between it and a wall.
      * @param collisionLocation where the collition is (left, right, up or down)
-     */
-    public void wallCollision(String collisionLocation) {
-        if (collisionLocation.equals("LEFT")) {
-            this.dx = 0;
-            this.setLocation(this.getX() + STEP, this.getY());
-        } 
-        if (collisionLocation.equals("RIGHT")) {
-            this.dx = 0;
-            this.setLocation(this.getX() - STEP, this.getY());
-        } 
-        if (collisionLocation.equals("UP")) {
-            this.dy = 0;
-            this.setLocation(this.getX(), this.getY() + STEP);
-        } 
-        if (collisionLocation.equals("DOWN")) {
-            this.dy = 0;
-            this.setLocation(this.getX(), this.getY() - STEP);
-        }
-    }   
+    //  */
+    // public void wallCollision(String collisionLocation) {
+    //     if (collisionLocation.equals("LEFT")) {
+    //         this.dx = 0;
+    //         this.setLocation(this.getX() + STEP, this.getY());
+    //     } 
+    //     if (collisionLocation.equals("RIGHT")) {
+    //         this.dx = 0;
+    //         this.setLocation(this.getX() - STEP, this.getY());
+    //     } 
+    //     if (collisionLocation.equals("UP")) {
+    //         this.dy = 0;
+    //         this.setLocation(this.getX(), this.getY() + STEP);
+    //     } 
+    //     if (collisionLocation.equals("DOWN")) {
+    //         this.dy = 0;
+    //         this.setLocation(this.getX(), this.getY() - STEP);
+    //     }
+    // }   
 
     public int getDx() {
         return this.dx;

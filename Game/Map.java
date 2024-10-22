@@ -2,6 +2,8 @@ package Game;
 
 import java.awt.Color;
 import java.util.*;
+
+import Common.GlobalConstants;
 import Objects.*;
 
 public class Map {
@@ -83,7 +85,8 @@ public class Map {
             j = 0;
             for (int cell : row) {
                 if (cell == 0) {
-                    Coin coin = new Coin(j * 30 + 10, i * 30 + 10);
+                    Coin coin = new Coin(j * GlobalConstants.TileSize + 10, 
+                                         i * GlobalConstants.TileSize + 10, 1);
                     this.coins.add(coin);
                 }
                 
