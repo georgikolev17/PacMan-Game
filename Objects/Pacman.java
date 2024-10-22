@@ -63,25 +63,29 @@ public class Pacman extends MovableObject {
     }
     
     public void changeDirection(int newDx, int newDy) {
-        boolean[] whereAreWalls = collisionDetection.whereAreWalls();
-        boolean canChange = true;
-        if (newDx > 0) {
-            canChange = !whereAreWalls[1];
-        }
-        if (newDx < 0) {
-            canChange = !whereAreWalls[0];
-        }
-        if (newDy > 0) {
-            canChange = !whereAreWalls[3];
-        }
-        if (newDy < 0) {
-            canChange = !whereAreWalls[2];
-        }
-        if (canChange) {
+        // boolean[] whereAreWalls = collisionDetection.whereAreWalls();
+        // boolean canChange = true;
+        // if (newDx > 0) {
+        //     canChange = !whereAreWalls[1];
+        // }
+        // if (newDx < 0) {
+        //     canChange = !whereAreWalls[0];
+        // }
+        // if (newDy > 0) {
+        //     canChange = !whereAreWalls[3];
+        // }
+        // if (newDy < 0) {
+        //     canChange = !whereAreWalls[2];
+        // }
+        // if (canChange) {
+        //     this.dx = newDx;
+        //     this.dy = newDy;
+        // }
+
+        if (collisionDetection.colidesWithWall(this.getX() + newDx, this.getY() + newDy) == null) {
             this.dx = newDx;
             this.dy = newDy;
         }
-        
     }
 
     

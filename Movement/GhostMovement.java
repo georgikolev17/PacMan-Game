@@ -36,6 +36,7 @@ public class GhostMovement {
      * @return the next step that the ghost should make on its way to killing the Pac-Man.
      */
     public Coordinates smartStep(int ghostRow, int ghostCol, int pacmanRow, int pacmanCol) {
+        
         boolean[][] checked = new boolean[map.length][map[0].length];
         var previous = new HashMap<Coordinates, Coordinates>();
         // Arrays.fill(checked, false);
@@ -81,6 +82,9 @@ public class GhostMovement {
 
         // The method returns the first step that a ghost needs to make 
         // on his way of chasing the Pac-Man
+        if (map[backwardsStep.getRow()][backwardsStep.getCol()] == 1) {
+            System.out.println("asaaaaa");
+        }
         return backwardsStep;
     }
 

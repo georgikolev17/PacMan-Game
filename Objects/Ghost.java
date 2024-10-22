@@ -8,7 +8,7 @@ import Movement.GhostMovement;
  */
 public abstract class Ghost extends MovableObject {
     protected static GhostMovement movement;
-    protected static final int GHOST_STEP = STEP - 1;
+    protected static final int GHOST_STEP = STEP - 2;
 
     public Ghost(int[][] grid, int spawnRow, int spawnCol) {
         super();

@@ -23,8 +23,6 @@ public class SmartGhost extends Ghost {
         int ghostRow = this.getY() / GlobalConstants.TileSize;
         int ghostCol = this.getX() / GlobalConstants.TileSize;
 
-        System.out.println(ghostRow);
-        System.out.println(ghostCol);
         // smartStep returns the next row and column that the ghost must go to 
         // based on the Pacman position.
         var nextCoordinates = movement.smartStep(ghostRow, ghostCol, pacmanRow, pacmanCol);

@@ -8,6 +8,7 @@ import javax.swing.Timer;
 
 
 import Common.GlobalConstants;
+import Movement.CollisionDetection;
 
 public abstract class MovableObject extends JPanel {
     protected static final int STEP = 5;
@@ -24,8 +25,22 @@ public abstract class MovableObject extends JPanel {
         this.setLocation(30, 30);
     }
 
-    public void step() {
-        this.setLocation(this.getX() + this.dx, this.getY() + this.dy);
+    public void step(CollisionDetection collisionDetection) {
+        var wall = collisionDetection.colidesWithWall(this.getX() + this.dx, this.getY() + this.dy);
+        // System.out.println(wall);
+        if (wall == null) {
+            this.setLocation(this.getX() + this.dx, this.getY() + this.dy);
+        } else {
+            if (this.dx > 0) {
+                this.setLocation(wall.getX() - GlobalConstants.TileSize, this.getY());
+            } else if (this.dx < 0) {
+                this.setLocation(wall.getX() + GlobalConstants.TileSize, this.getY());
+            } else if (this.dy > 0) {
+                this.setLocation(this.getX(), wall.getY() - GlobalConstants.TileSize);
+            } else if (this.dy < 0) {
+                this.setLocation(this.getX(), wall.getY() + GlobalConstants.TileSize);
+            }
+        }
 
         // Ensure the object stays within panel bounds
         if (this.getX() < 0) {
@@ -44,7 +59,7 @@ public abstract class MovableObject extends JPanel {
         repaint();
     }
     protected boolean canChangeDirection() {
-        System.out.println(this.getX() + " " + this.getX());
+        // System.out.println(this.getX() + " " + this.getX());
         return this.getX() % GlobalConstants.TileSize == 0 && this.getY() % GlobalConstants.TileSize == 0;
     }
 

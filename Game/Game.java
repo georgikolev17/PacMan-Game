@@ -1,21 +1,18 @@
 package Game;
 
+import Movement.CollisionDetection;
+import Objects.MovableObject;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import Objects.Ghost;
-import Objects.MovableObject;
-import Objects.Pacman;
-
-import Game.Renderer;
-import Movement.CollisionDetection;
-
+/**
+ * Summary: d.
+ */
 public class Game implements ActionListener {
     private Timer timer;
     public static GameThread gameThread;
@@ -28,6 +25,9 @@ public class Game implements ActionListener {
     public static JFrame frame;
     public static JPanel panel;
 
+    /**
+     * Summary: d.
+     */
     public void NewGame() {
         this.gameState = new GameState(); // object with all objects in game.
 
@@ -65,23 +65,23 @@ public class Game implements ActionListener {
         frame.setResizable(false); // Makes it so you cant resize window.
         frame.setVisible(true);
 
-        this.timer = new Timer(30, this); // fires the timer every 1ms (calls actionPer)
+        this.timer = new Timer(20, this); // fires the timer every 1ms (calls actionPer)
         timer.start();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(this.gameState.getPacman().getX() + " " + this.gameState.getPacman().getY());
+        // System.out.println(this.gameState.getPacman().getX() + " " + this.gameState.getPacman().getY());
         // System.out.println(this.gameState.getPacman().getSize());
 
-        this.gameState.getPacman().step();
+        this.gameState.getPacman().step(this.collisionDetection);
 
         var ghosts = this.gameState.getGhosts();
         for (var ghost : ghosts) {
             ghost.changeDirection(this.gameState.getPacman().getX(), this.gameState.getPacman().getY());
-            ghost.step();
+            ghost.step(this.collisionDetection);
         }
 
-        collisionDetection.checkCollision();
+        // collisionDetection.checkCollision();
     }
 }

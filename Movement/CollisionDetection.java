@@ -1,6 +1,9 @@
 package Movement;
 
 import java.util.ArrayList;
+
+import Common.GlobalConstants;
+
 import java.lang.Math;
 
 import Objects.MovableObject;
@@ -65,5 +68,18 @@ public class CollisionDetection {
             }
         }
         return whereAreWalls;
+    }
+
+    public Wall colidesWithWall(int x, int y) {
+        for (Wall wall : walls) {
+            int wallX = wall.getX();
+            int wallY = wall.getY();
+
+            if (Math.abs(x - wallX) < GlobalConstants.TileSize 
+                && Math.abs(y - wallY) < GlobalConstants.TileSize) {
+                return wall;
+            }
+        }
+        return null;
     }
 }
