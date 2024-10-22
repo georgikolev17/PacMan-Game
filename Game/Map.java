@@ -22,6 +22,22 @@ public class Map {
         this.generateCoins();
     }
 
+    public int[][] getGrid() {
+        return this.grid;
+    }
+
+    public ArrayList<Wall> getWalls() {
+        return this.walls;
+    }
+
+    public ArrayList<Coin> getCoins() {
+        return this.coins;
+    }
+
+    public boolean areAnyCoinsLeft() {
+        return this.coins.stream().anyMatch(c -> !c.getIsEaten());
+    }
+
     /**
      * Creates the grid(map).
      */
@@ -78,13 +94,15 @@ public class Map {
         }
     }
 
-    private void generateCoins() {
+    public void generateCoins() {
         int i = 0;
         int j = 0;
+        this.coins.clear();
         for (int[] row : grid) {
             j = 0;
             for (int cell : row) {
-                if (cell == 0) {
+                // TODO: !!!! i == 1 IS JUST FOR TESTING THE LEVELS FUNCTIONALITY, REMOVE LATER!!!
+                if (cell == 0 && i == 1) {
                     Coin coin = new Coin(j * GlobalConstants.TileSize + 10, 
                                          i * GlobalConstants.TileSize + 10, 1);
                     this.coins.add(coin);
@@ -94,17 +112,5 @@ public class Map {
             }
             i++;
         }
-    }
-
-    public int[][] getGrid() {
-        return this.grid;
-    }
-
-    public ArrayList<Wall> getWalls() {
-        return this.walls;
-    }
-
-    public ArrayList<Coin> getCoins() {
-        return this.coins;
     }
 }

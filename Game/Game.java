@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+import java.util.*;
 /**
  * Summary: d.
  */
@@ -24,8 +24,8 @@ public class Game implements ActionListener {
 
     public static int ROWS = 20;
     public static int COLUMNS = 30;
-    public static JFrame frame;
-    public static JPanel panel; // Main panel
+    public JFrame frame;
+    public JPanel panel; // Main panel
 
     /**
      * Summary: d.
@@ -56,10 +56,8 @@ public class Game implements ActionListener {
             panel.add(wall);
         }
 
-        // Adds every coin in the map to the panel
-        for (var coin : map.getCoins()) {
-            panel.add(coin);
-        }
+        // Spawns coins on the map
+        this.spawnCoins(this.gameState.getCoins());
 
         // Puts label for score in the panel to the front
         JLabel scoreLabel = this.gameState.getText().getScore();
@@ -99,12 +97,29 @@ public class Game implements ActionListener {
         var coin = collisionDetection.checkCoinCollision();
         if (coin != null) {
             this.removeCoin(coin);
+            
+        }
+
+        if (!this.gameState.getMap().areAnyCoinsLeft()) {
+            System.out.println("No coins left!");
+            this.gameState.getMap().generateCoins();
+            this.spawnCoins(this.gameState.getCoins());
+            this.gameState.levelUp();
+            // TODO: Spawn 1 more stupid and smart ghost.
         }
     }
 
     private void removeCoin(Coin coin) {
-        panel.remove(coin); // Removes coin from the panel
+        this.panel.remove(coin); // Removes coin from the panel
         coin.setIsEaten(true); // Sets the coin as eaten
         this.gameState.addScore(coin.getValue());
+        
+    }
+
+    private void spawnCoins(ArrayList<Coin> coins) {
+        // Adds every coin in the map to the panel
+        for (var coin : this.gameState.getMap().getCoins()) {
+            panel.add(coin);
+        }
     }
 }
