@@ -9,18 +9,16 @@ import java.util.ArrayList;
  */
 public class GameState {
     private int score = 0;
-    private int level = 0;
+    private int level = 1;
     private ArrayList<Ghost> ghosts;
-    private ArrayList<Coin> coins;
     private Pacman pacman;
     private Map map;
     private Text text;
     
     public GameState() {
         this.ghosts = new ArrayList<Ghost>();
-        this.coins = new ArrayList<Coin>();
-
         this.map = new Map();
+    
         this.pacman = new Pacman(this.map.getWalls(), this.map.getCoins(), this);
         this.text = new Text();
       
@@ -33,7 +31,7 @@ public class GameState {
     }
 
     public ArrayList<Coin> getCoins() {
-        return this.coins;
+        return this.getMap().getCoins();
     }
 
     public ArrayList<Ghost> getGhosts() {
@@ -55,5 +53,10 @@ public class GameState {
     public void addScore(int increment) {
         this.score += increment;
         this.text.setScore(this.score);
+    }
+
+    public void levelUp() {
+        this.level++;
+        this.text.setLevel(this.level);
     }
 }
