@@ -22,8 +22,9 @@ public class GameState {
         this.pacman = new Pacman(this.map.getWalls(), this.map.getCoins(), this);
         this.text = new Text();
       
-        this.ghosts.add(new SmartGhost(this.map.getGrid(), 1, 1));
-        this.ghosts.add(new StupidGhost(this.map.getGrid(), 1, 1));
+
+        this.spawnSmartGhost(18, 1);
+        this.spawnStupidGhost(18, 1);
     }
 
     public Pacman getPacman() {
@@ -58,5 +59,17 @@ public class GameState {
     public void levelUp() {
         this.level++;
         this.text.setLevel(this.level);
+    }
+
+    public Ghost spawnSmartGhost(int row, int col) {
+        var smart = new SmartGhost(this.map.getGrid(), row, col);
+        this.ghosts.add(smart);
+        return smart;
+    }
+
+    public Ghost spawnStupidGhost(int row, int col) {
+        var stupid = new StupidGhost(this.map.getGrid(), row, col);
+        this.ghosts.add(stupid);
+        return stupid;
     }
 }
