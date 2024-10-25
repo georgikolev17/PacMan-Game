@@ -102,7 +102,7 @@ public class Map {
             j = 0;
             for (int cell : row) {
                 // TODO: !!!! i == 1 IS JUST FOR TESTING THE LEVELS FUNCTIONALITY, REMOVE LATER!!!
-                if (cell == 0 && i == 1) {
+                if (cell == 0) {
                     Coin coin = new Coin(j * GlobalConstants.TileSize + 10, 
                                          i * GlobalConstants.TileSize + 10, 1);
                     this.coins.add(coin);

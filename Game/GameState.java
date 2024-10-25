@@ -51,6 +51,10 @@ public class GameState {
         return this.score;
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
     public void addScore(int increment) {
         this.score += increment;
         this.text.setScore(this.score);

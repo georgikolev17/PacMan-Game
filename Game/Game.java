@@ -2,6 +2,7 @@ package Game;
 
 import Movement.CollisionDetection;
 import Objects.Coin;
+import Objects.Menu;
 import Objects.MovableObject;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -62,12 +63,12 @@ public class Game implements ActionListener {
         // Puts label for score in the panel to the front
         JLabel scoreLabel = this.gameState.getText().getScore();
         panel.add(scoreLabel);
-        panel.setComponentZOrder(scoreLabel, 0);  // Puts the label in front
+        panel.setComponentZOrder(scoreLabel, 1);  // Puts the label in front
 
         // Puts label for level in the panel to the front
         JLabel levelLabel = this.gameState.getText().getLevel();
         panel.add(levelLabel);
-        panel.setComponentZOrder(levelLabel, 0);  // Puts the label in front
+        panel.setComponentZOrder(levelLabel, 1);  // Puts the label in front
 
         for (var ghost : this.gameState.getGhosts()) {
             panel.add(ghost);
@@ -93,7 +94,7 @@ public class Game implements ActionListener {
             ghost.changeDirection(this.gameState.getPacman().getX(), this.gameState.getPacman().getY());
             ghost.step(this.collisionDetection);
         }
-        collisionDetection.checkCollision();
+
         var coin = collisionDetection.checkCoinCollision();
         if (coin != null) {
             this.removeCoin(coin);
@@ -101,7 +102,6 @@ public class Game implements ActionListener {
         }
 
         if (!this.gameState.getMap().areAnyCoinsLeft()) {
-            System.out.println("No coins left!");
             this.gameState.getMap().generateCoins();
             this.spawnCoins(this.gameState.getCoins());
             this.gameState.levelUp();
@@ -119,13 +119,16 @@ public class Game implements ActionListener {
     }
 
     private void gameOver() {
-        this.timer.stop();
-        // TODO: This is temporary solution just for easier development. 
-        // Game over logic should be implemented.
-        // -------------------
-        // this.frame.dispose();
-        // this.NewGame();
-        // -------------------
+        timer.stop(); // Stops timer from running
+
+        Menu menu = new Menu(this); // Creates a quit menu
+        menu.setBounds(0, 0, panel.getWidth(), panel.getHeight()); 
+
+        panel.add(menu);
+        panel.setComponentZOrder(menu, 0); // Puts the menu infront of everything else
+
+        panel.revalidate();
+        panel.repaint();
     }
 
     private void removeCoin(Coin coin) {
