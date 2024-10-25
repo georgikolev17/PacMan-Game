@@ -106,6 +106,10 @@ public class Game implements ActionListener {
             this.spawnCoins(this.gameState.getCoins());
             this.gameState.levelUp();
             // TODO: Spawn 1 more stupid and smart ghost.
+            var smart = this.gameState.spawnSmartGhost(18, 1);
+            var stupid = this.gameState.spawnStupidGhost(18, 1);
+            panel.add(smart);
+            panel.add(stupid);
         }
 
         if (this.collisionDetection.pacmanCollidesWithGhost(this.gameState.getPacman().getX(),
@@ -119,8 +123,8 @@ public class Game implements ActionListener {
         // TODO: This is temporary solution just for easier development. 
         // Game over logic should be implemented.
         // -------------------
-        this.frame.dispose();
-        this.NewGame();
+        // this.frame.dispose();
+        // this.NewGame();
         // -------------------
     }
 
