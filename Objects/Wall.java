@@ -6,6 +6,9 @@ import java.awt.Graphics2D;
 
 import javax.swing.*;
 
+/**
+ * Summary: Walls are located in the map to stop the movement of movable objects.
+ */
 public class Wall extends JPanel {
     private int side = 30; //pixels
 

@@ -25,6 +25,10 @@ public abstract class MovableObject extends JPanel {
         this.setLocation(30, 30);
     }
 
+    /**
+     * Makes a step in certain direction if possible.
+     * @param collisionDetection collisionDetection.
+     */
     public void step(CollisionDetection collisionDetection) {
         var wall = collisionDetection.colidesWithWall(this.getX() + this.dx, this.getY() + this.dy);
         // System.out.println(wall);
@@ -58,33 +62,15 @@ public abstract class MovableObject extends JPanel {
         // Repaint the object
         repaint();
     }
-    protected boolean canChangeDirection() {
-        // System.out.println(this.getX() + " " + this.getX());
-        return this.getX() % GlobalConstants.TileSize == 0 && this.getY() % GlobalConstants.TileSize == 0;
-    }
 
     /**
-     * Stops the pacman from moving if there is a collision between it and a wall.
-     * @param collisionLocation where the collition is (left, right, up or down)
-    //  */
-    // public void wallCollision(String collisionLocation) {
-    //     if (collisionLocation.equals("LEFT")) {
-    //         this.dx = 0;
-    //         this.setLocation(this.getX() + STEP, this.getY());
-    //     } 
-    //     if (collisionLocation.equals("RIGHT")) {
-    //         this.dx = 0;
-    //         this.setLocation(this.getX() - STEP, this.getY());
-    //     } 
-    //     if (collisionLocation.equals("UP")) {
-    //         this.dy = 0;
-    //         this.setLocation(this.getX(), this.getY() + STEP);
-    //     } 
-    //     if (collisionLocation.equals("DOWN")) {
-    //         this.dy = 0;
-    //         this.setLocation(this.getX(), this.getY() - STEP);
-    //     }
-    // }   
+     * Summary: Checks if change of direction is possible.
+     * @return true or false.
+     */
+    protected boolean canChangeDirection() {
+        return this.getX() % GlobalConstants.TileSize == 0 
+            && this.getY() % GlobalConstants.TileSize == 0;
+    } 
 
     public int getDx() {
         return this.dx;

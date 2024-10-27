@@ -1,9 +1,8 @@
 package Objects;
 
+import Common.GlobalConstants;
 import java.awt.*;
 import javax.swing.*;
-
-import Common.GlobalConstants;
 
 /**
  * Summary: The coin has a position on the map and points that it gives to the player.
@@ -15,8 +14,9 @@ public class Coin extends JPanel{
 
     /**
      * Summary: Initializes a new Coin class with the given x and y coordinates and points.
-     * @param x x-coordinate
-     * @param y y-coordinate
+     * @param xCord x-coordinate
+     * @param yCord y-coordinate
+     * @param value value of the coin.
      */
     public Coin(int xCord, int yCord, int value) {
         this.value = value;

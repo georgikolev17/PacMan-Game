@@ -4,7 +4,7 @@ import Common.GlobalConstants;
 import Movement.GhostMovement;
 
 /**
- * Ghost
+ * Summary: This class has the basic information about a ghost.
  */
 public abstract class Ghost extends MovableObject {
     protected static GhostMovement movement;

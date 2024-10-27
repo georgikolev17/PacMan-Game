@@ -1,10 +1,9 @@
 package Game;
 
-import java.awt.Color;
-import java.util.*;
-
 import Common.GlobalConstants;
-import Objects.*;
+import Objects.Coin;
+import Objects.Wall;
+import java.util.ArrayList;
 
 public class Map {
     private int[][] grid;
@@ -94,6 +93,9 @@ public class Map {
         }
     }
 
+    /**
+     * Summary: Generates coins on all free tiles.
+     */
     public void generateCoins() {
         int i = 0;
         int j = 0;
@@ -101,11 +103,15 @@ public class Map {
         for (int[] row : grid) {
             j = 0;
             for (int cell : row) {
-                // TODO: !!!! i == 1 IS JUST FOR TESTING THE LEVELS FUNCTIONALITY, REMOVE LATER!!!
-                if (cell == 0) {
-                    Coin coin = new Coin(j * GlobalConstants.TileSize + 10, 
-                                         i * GlobalConstants.TileSize + 10, 1);
-                    this.coins.add(coin);
+                
+                // !!!REMOVE THIS FOR FULL VERSION OF THE GAME!!!
+                if (i == 1) {
+                    // This if is only here for easier testing!
+                    if (cell == 0) {
+                        Coin coin = new Coin(j * GlobalConstants.TileSize + 10, 
+                            i * GlobalConstants.TileSize + 10, 1);
+                        this.coins.add(coin);
+                    }
                 }
                 
                 j++;

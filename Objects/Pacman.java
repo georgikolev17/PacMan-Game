@@ -96,13 +96,16 @@ public class Pacman extends MovableObject {
     public void nextChangeDirection(String direction) {
         if (direction.equals("LEFT")) {
             changeDirection(-STEP, 0);
-        } if (direction.equals("RIGHT")) {
+        } 
+        if (direction.equals("RIGHT")) {
             changeDirection(STEP, 0);
             
-        } if (direction.equals("UP")) {
+        } 
+        if (direction.equals("UP")) {
             changeDirection(0, -STEP);
             
-        } if (direction.equals("DOWN")) {
+        } 
+        if (direction.equals("DOWN")) {
             changeDirection(0, STEP);
         }
     }

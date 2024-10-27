@@ -5,11 +5,13 @@ import java.awt.Graphics;
 
 import Common.GlobalConstants;
 
+/**
+ * Summary: Implements logic for the Smart ghost.
+ */
 public class SmartGhost extends Ghost {
 
     public SmartGhost(int[][] grid, int spawnRow, int spawnCol) {
         super(grid, spawnRow, spawnCol);
-        //TODO Auto-generated constructor stub
     }
 
     @Override

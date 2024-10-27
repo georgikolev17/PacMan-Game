@@ -8,19 +8,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.util.*;
+
 /**
- * Summary: d.
+ * Summary: The Game class controls the operations in the whole game.
  */
 public class Game implements ActionListener {
     private Timer timer;
-    public static GameThread gameThread;
     public GameState gameState;
-    public static Renderer renderer;
     public CollisionDetection collisionDetection;
 
     public static int ROWS = 20;
@@ -29,7 +28,7 @@ public class Game implements ActionListener {
     public JPanel panel; // Main panel
 
     /**
-     * Summary: d.
+     * Summary: Starts a new game.
      */
     public void NewGame() {
         this.gameState = new GameState(); // object with all objects in game.
@@ -87,11 +86,13 @@ public class Game implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.gameState.getPacman().step(this.collisionDetection);
-        this.gameState.getPacman().nextChangeDirection(this.gameState.getPacman().getNextDirection());
+        this.gameState.getPacman()
+            .nextChangeDirection(this.gameState.getPacman().getNextDirection());
 
         var ghosts = this.gameState.getGhosts();
         for (var ghost : ghosts) {
-            ghost.changeDirection(this.gameState.getPacman().getX(), this.gameState.getPacman().getY());
+            ghost.changeDirection(this.gameState.getPacman().getX(), 
+                this.gameState.getPacman().getY());
             ghost.step(this.collisionDetection);
         }
 

@@ -6,9 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * Summary: The menu that is diaplayed when the game is over.
+ */
 public class Menu extends JPanel {
-    private int windowLength;
-    private int windowWidth;
     private JButton newGameButton;
     private JButton quitButton;
     private JLabel scoreText;
@@ -16,8 +17,6 @@ public class Menu extends JPanel {
     private Game game; // the object that runs the game
 
     public Menu(Game game) {
-        this.windowLength = 910;
-        this.windowWidth = 630;
         this.game = game;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

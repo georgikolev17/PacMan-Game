@@ -3,6 +3,9 @@ package Objects;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Summary: This text shows the level and the score in the current game.
+ */
 public class Text {
     private static JLabel scoreTextArea;
     private static JLabel levelTextArea;

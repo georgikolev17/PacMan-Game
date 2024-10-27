@@ -32,25 +32,33 @@ public class CollisionDetection {
         this.objSize = this.pacman.getObjectSize();
     }
 
+    /**
+     * Checks if the Pac-Man collides with a coin.
+     * @return The coin the Pac-Man collides with, if any.
+     */
     public Coin checkCoinCollision() {
         for (Coin coin : coins) {
             if (!coin.getIsEaten() && (-coin.getObjectSize() < (coin.getX() - this.pacman.getX())) 
-                && ((coin.getX() - this.pacman.getX()) < 0) && (Math.abs(coin.getY() - this.pacman.getY()) == 10) 
+                && ((coin.getX() - this.pacman.getX()) < 0) 
+                && (Math.abs(coin.getY() - this.pacman.getY()) == 10) 
                 && (this.pacman.getDx() < 0)) {
                 return coin;
             } 
             if (!coin.getIsEaten() && (this.objSize > (coin.getX() - this.pacman.getX()))
-                && ((coin.getX() - this.pacman.getX()) > 0) && (Math.abs(coin.getY() - this.pacman.getY()) == 10) 
+                && ((coin.getX() - this.pacman.getX()) > 0) 
+                && (Math.abs(coin.getY() - this.pacman.getY()) == 10) 
                 && (this.pacman.getDx() > 0)) {
                 return coin;
             } 
             if (!coin.getIsEaten() && (-coin.getObjectSize() < (coin.getY() - this.pacman.getY())) 
-                && ((coin.getY() - this.pacman.getY()) < 0) && (Math.abs(coin.getX() - this.pacman.getX()) == 10) 
+                && ((coin.getY() - this.pacman.getY()) < 0) 
+                && (Math.abs(coin.getX() - this.pacman.getX()) == 10) 
                 && (this.pacman.getDy() < 0)) {
                 return coin;
             } 
             if (!coin.getIsEaten() && (this.objSize > (coin.getY() - this.pacman.getY())) 
-                && ((coin.getY() - this.pacman.getY()) > 0) && (Math.abs(coin.getX() - this.pacman.getX()) == 10) 
+                && ((coin.getY() - this.pacman.getY()) > 0) 
+                && (Math.abs(coin.getX() - this.pacman.getX()) == 10) 
                 && (this.pacman.getDy() > 0)) {
                 return coin;
             }
@@ -58,6 +66,12 @@ public class CollisionDetection {
         return null;
     }
 
+    /**
+     * Checks if an object collides with a wall.
+     * @param x x.
+     * @param y y.
+     * @return The wall the object collides with, if any.
+     */
     public Wall colidesWithWall(int x, int y) {
         for (Wall wall : walls) {
             int wallX = wall.getX();
@@ -71,6 +85,12 @@ public class CollisionDetection {
         return null;
     }
 
+    /**
+     * Checks if the Pac-Man collides with any ghost.
+     * @param pacmanX x-coordinate of Pac-Man
+     * @param pacmanY y-coordinate of Pac-Man
+     * @return true or false.
+     */
     public boolean pacmanCollidesWithGhost(int pacmanX, int pacmanY) {
         for (Ghost ghost : this.ghosts) {
             int ghostX = ghost.getX();

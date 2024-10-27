@@ -55,22 +55,41 @@ public class GameState {
         return this.level;
     }
 
+    /**
+     * Summary: Increases the score with a given amount.
+     * @param increment increment.
+     */
     public void addScore(int increment) {
         this.score += increment;
         this.text.setScore(this.score);
     }
 
+    /**
+     * Summary: Increases the level with 1.
+     */
     public void levelUp() {
         this.level++;
         this.text.setLevel(this.level);
     }
 
+    /**
+     * Summary: Spawns new smart ghost.
+     * @param row row.
+     * @param col column.
+     * @return The spawned ghost.
+     */
     public Ghost spawnSmartGhost(int row, int col) {
         var smart = new SmartGhost(this.map.getGrid(), row, col);
         this.ghosts.add(smart);
         return smart;
     }
 
+    /**
+     * Summary: Spawns new stupid ghost.
+     * @param row row.
+     * @param col column.
+     * @return The spawned ghost.
+     */
     public Ghost spawnStupidGhost(int row, int col) {
         var stupid = new StupidGhost(this.map.getGrid(), row, col);
         this.ghosts.add(stupid);
